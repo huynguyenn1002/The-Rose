@@ -18,12 +18,8 @@ class AdminController extends Controller
      */
     public function adminDashboard()
     {
-        $user = Auth::guard('admin')->user();
-        if($user) {
-            $admin = DB::table("admins")->where('id', $user->id)->first();
-            return view('Admin.admin-dashboard', ['admin' => $admin]);
-        }
-        return redirect('admin/login')->with('status', 'Bạn phải đăng nhập trước');
+        $admin = Auth::guard('admin')->user();
+        return view('Admin.admin-dashboard', ['admin' => $admin]);
     }
 
     public function showLoginForm() 
