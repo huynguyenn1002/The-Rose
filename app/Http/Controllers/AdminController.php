@@ -8,6 +8,10 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
+use App\Models\City;
+use App\Models\Province;
+use App\Models\Ward;
+
 
 class AdminController extends Controller
 {
@@ -35,7 +39,8 @@ class AdminController extends Controller
     public function adminRegister(Request $request) 
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:200',
+            'firstname' => 'required|max:200',
+            'lastname' => 'required|max:200',
             'mail_address' => 'required|max:255',
             'password' => 'required|max:255',
         ]);
@@ -45,7 +50,8 @@ class AdminController extends Controller
         }
 
         Admin::create([
-            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'mail_address' => $request->mail_address,
             'password' => $request->password,
         ]);
@@ -79,6 +85,83 @@ class AdminController extends Controller
     }
 
     public function showAdminProfile() {
-        return view('Admin.admin-profile');
+        $admin = Auth::guard('admin')->user();
+        $city = City::all();
+        $province = Province::all();
+        $ward = Ward::all();
+        return view('Admin.admin-profile', [
+            'admin' => $admin, 
+            'citys' => $city, 
+            'provinces' => $province, 
+            'wards' => $ward 
+        ]);
     }
+
+    public function updateAdminProfile(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'string|max:255',
+            'lastname' => 'string|max:255',
+            'tel' => 'min:10|max:12',
+            'address' => 'string|max:255',
+            'mail_address' => 'string|max:255',
+            'password' => 'string|max:255|nullable',
+            'password_confirm' => 'string|nullable|max:255',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        DB::transaction(function() use($request) {
+            $city_id = explode('.', $request->city)[0];
+            $city = explode('.', $request->city)[1];
+            $province_id = explode('.', $request->province)[0];
+            $province = explode('.', $request->province)[1];
+            $ward_id = explode('.', $request->ward)[0];
+            $ward = explode('.', $request->ward)[1];
+
+            $admin = Admin::where('id', $request->id)->first();
+            $admin->update([
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'mail_address' => $request->mail_address,
+                'city_id' => $city_id,
+                'city_name' => $city,
+                'province_id' => $province_id,
+                'province_name' => $province,
+                'ward_id' => $ward_id,
+                'ward_name' => $ward,
+                'address' => $request->address,
+                'tel' => $request->tel,
+                'password' => $request->password
+            ]);
+
+            if($request->hasFile('avatar')){
+                $filename = $request->avatar->getClientOriginalName();
+                $request->avatar->storeAs('avatar',$filename,'public');
+                Auth::guard("admin")->user()->update(['avatar'=>$filename]);
+            }
+            return redirect()->back();
+        });
+        return redirect('/admin/profile')->with('success', 'Cập nhật thông tin thành công');
+    }
+
+    public function adminGetProvinceInfo(Request $request) {
+        $data = $request->all();
+        $user = Auth::guard('admin')->user();
+
+        $province = DB::table("province")->select('*')->where("province.city_id", '=', $data["cityCode"])->get();
+        $returnView = view("Admin.admin-get-province")->with(['options' => $province, 'admin' => $user])->render();
+        return response()->json(["html" => $returnView], 200);
+    }
+
+    public function adminGetWardInfo(Request $request) {
+        $data = $request->all();
+        $user = Auth::guard('admin')->user();
+
+        $ward = DB::table("ward")->select('*')->where("ward.province_id", '=', $data["provinceCode"])->get();
+        $returnView = view("Admin.admin-get-ward")->with(['options' => $ward, 'admin' => $user])->render();
+        return response()->json(["html" => $returnView], 200);
+    }
+    
 }

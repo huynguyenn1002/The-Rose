@@ -11,13 +11,24 @@ class Admin extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'mail_address', 
+        'firstname', 
+        'lastname', 
+        'mail_address',
+        'tel',
+        'avatar',
+        'city_id',
+        'province_id',
+        'ward_id',
+        'city_name',
+        'province_name',
+        'ward_name',
+        'address',
         'password',
+        'password_confirm'
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'password_confirm'
     ];
 
     public function setPasswordAttribute($password)
