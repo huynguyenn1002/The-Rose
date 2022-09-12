@@ -39,7 +39,7 @@
             </a>
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
-                    <img class="rounded-circle" src="{{ url('storage/avatar/'.$admin->avatar) }}" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle" src="{{ isset($admin) ? url('storage/avatar/'.$admin->avatar) : '' }}" alt="" style="width: 40px; height: 40px;">
                     <div
                         class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                     </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="navbar-nav w-100">
-                <a href="index.html" class="nav-item nav-link active"><i
+                <a href="{{ route('admin.dashboard.get') }}" class="nav-item nav-link active"><i
                         class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i

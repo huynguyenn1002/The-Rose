@@ -26,7 +26,7 @@
                     <div class="col-md-8 border-right">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Profile Settings</h4>
+                                <h4 class="text-right">Chỉnh sửa thông tin cá nhân</h4>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6"><label class="labels">Tên</label><input type="text"
@@ -69,17 +69,23 @@
                                 <div class="col-md-12 address"><label class="labels">Email</label><input type="text"
                                         name="mail_address" class="form-control" placeholder="enter email id"
                                         value="{{ old('mail_address') ?? $admin->mail_address ?? '' }}"></div>
-                                <div class="col-md-12 address"><label class="labels">Mật khẩu mới</label><input autocomplete="new-password"
-                                        type="password" name="password" class="form-control" placeholder="Mật khẩu mới">
+                                <div class="col-md-12 address">
+                                    <label for="html">Nếu muốn thay đổi mật khẩu, vui lòng click vào đây</label>
+                                    <input type="checkbox" id="check-change-password" name="fav_language" value="HTML">
                                 </div>
-                                <div class="col-md-12 address"><label class="labels">Nhập lại mật khẩu mới</label><input autocomplete="new-password"
-                                        type="password" name="password_confirm" class="form-control"
-                                        placeholder="Nhập lại mật khẩu mới"></div>
-
+                                <div class="change-password" id="change-password" style="display: none">
+                                    <div class="col-md-12 address"><label class="labels">Mật khẩu mới</label><input
+                                            autocomplete="new-password" type="password" name="password"
+                                            class="form-control" placeholder="Mật khẩu mới">
+                                    </div>
+                                    <div class="col-md-12 address"><label class="labels">Nhập lại mật khẩu
+                                            mới</label><input autocomplete="new-password" type="password"
+                                            name="password_confirm" class="form-control"
+                                            placeholder="Nhập lại mật khẩu mới"></div>
+                                </div>
                             </div>
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button"
-                                    type="submit">Save
-                                    Profile</button></div>
+                                    type="submit">Lưu thay đổi</button></div>
                         </div>
                     </div>
                 </div>
@@ -90,4 +96,14 @@
 
 <script src="{{ asset('js/get-address-info.js') }}"></script>
 <script src="{{ asset('js/test.js') }}"></script>
-
+<script>
+    $(function () {
+        $("#check-change-password").click(function () {
+            if ($(this).is(":checked")) {
+                $("#change-password").show();
+            } else {
+                $("#change-password").hide();
+            }
+        });
+    });
+</script>
