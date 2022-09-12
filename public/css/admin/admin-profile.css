@@ -1,0 +1,7 @@
+.form-control:disabled, .form-control:read-only {
+    background: white !important;
+}
+
+.address {
+    padding: 10px 0;
+}

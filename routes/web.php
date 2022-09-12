@@ -23,5 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/register', [App\Http\Controllers\AdminController::class, 'showRegisterForm'])->name('admin.register.get');
     Route::post('/register', [App\Http\Controllers\AdminController::class, 'adminRegister'])->name('admin.register.post');
     Route::post('/logout', [App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('/profile', [App\Http\Controllers\AdminController::class, 'showAdminProfile'])->name('admin.profile.get');
+    Route::get('/profile', [App\Http\Controllers\AdminController::class, 'showAdminProfile'])->name('admin.profile.get')->middleware('admin');
+    Route::get('get-province-info/', [App\Http\Controllers\AdminController::class, 'adminGetProvinceInfo'])->name('admin.admin-get-province');
+    Route::get('get-ward-info/', [App\Http\Controllers\AdminController::class, 'adminGetWardInfo'])->name('admin.admin-get-ward');
+    Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateAdminProfile'])->name('admin.update.profile');
 });

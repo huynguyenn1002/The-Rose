@@ -23,9 +23,14 @@
                     <form action="{{ route('admin.register.post') }} " method="post">
                         @csrf
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="name" id="floatingText"
+                            <input type="text" class="form-control" name="firstname" id="floatingText"
                                 placeholder="jhondoe">
-                            <label for="floatingText">Username</label>
+                            <label for="floatingText">Họ</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="lastname" id="floatingText"
+                                placeholder="jhondoe">
+                            <label for="floatingText">Tên</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" name="mail_address" id="floatingInput"
