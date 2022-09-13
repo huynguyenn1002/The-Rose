@@ -86,7 +86,14 @@
                                 <div class="col-md-12 address"><label class="labels">Địa chỉ</label>
                                     <select name="province" id="province" class="form-control" placeholder="Tỉnh/Thành"
                                         data-type="province">
-                                        <option value="">Tỉnh/Thành</option>
+                                        <option value="">Tỉnh/Thành phố</option>
+                                        @foreach($provinces as $province)
+                                        <option value="{{ $province->id.'.'.$province->name }}" @if(isset($admin) &&
+                                            $admin->province_id == $province->id)
+                                            selected="selected"
+                                            @endif>
+                                            {{ $province->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12 address">

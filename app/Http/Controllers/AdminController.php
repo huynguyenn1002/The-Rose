@@ -113,24 +113,24 @@ class AdminController extends Controller
         }
 
         DB::transaction(function() use($request) {
-            // $province_id = explode('.', $request->province)[0];
-            // $province = explode('.', $request->province)[1];
-            // $district_id = explode('.', $request->district)[0];
-            // $district = explode('.', $request->district)[1];
-            // $ward_id = explode('.', $request->ward)[0];
-            // $ward = explode('.', $request->ward)[1];
+            $province_id = explode('.', $request->province)[0];
+            $province = explode('.', $request->province)[1];
+            $district_id = explode('.', $request->district)[0];
+            $district = explode('.', $request->district)[1];
+            $ward_id = explode('.', $request->ward)[0];
+            $ward = explode('.', $request->ward)[1];
 
             $admin = Admin::where('id', $request->id)->first();
             $admin->update([
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,
                 'mail_address' => $request->mail_address,
-                'province_id' => $request->province,
-                // 'province_name' => $province,
-                'district_id' => $request->district,
-                // 'district_name' => $district,
-                'ward_id' => $request->ward,
-                // 'ward_name' => $ward,
+                'province_id' => $province_id,
+                'province_name' => $province,
+                'district_id' => $district_id,
+                'district_name' => $district,
+                'ward_id' => $ward_id,
+                'ward_name' => $ward,
                 'address' => $request->address,
                 'tel' => $request->tel,
                 'password' => $request->password
@@ -152,7 +152,7 @@ class AdminController extends Controller
 
         $district = DB::table("districts")->select('*')->where("districts.province_id", '=', $data["provinceCode"])->get();
         $returnView = view("Admin.admin-get-district")->with(['options' => $district, 'admin' => $user])->render();
-        return response()->json(["html" => $returnView], 200);
+        return response()->json(["html" => $returnView, "district_id" => $user->district_id], 200);
     }
 
     public function adminGetWardInfo(Request $request) {
