@@ -86,13 +86,13 @@ class AdminController extends Controller
 
     public function showAdminProfile() {
         $admin = Auth::guard('admin')->user();
-        $city = City::all();
-        $province = Province::all();
-        $ward = Ward::all();
+        $province = \Kjmtrue\VietnamZone\Models\Province::get();
+        $district = \Kjmtrue\VietnamZone\Models\District::get();
+        $ward = \Kjmtrue\VietnamZone\Models\Ward::get();
         return view('Admin.admin-profile', [
             'admin' => $admin, 
-            'citys' => $city, 
             'provinces' => $province, 
+            'districts' => $district, 
             'wards' => $ward 
         ]);
     }
@@ -105,7 +105,7 @@ class AdminController extends Controller
             'address' => 'string|max:255',
             'mail_address' => 'string|max:255',
             'password' => 'string|max:255|nullable',
-            'password_confirm' => 'string|nullable|max:255',
+            'password_confirm' => 'string|same:password|nullable|max:255',
         ]);
 
         if($validator->fails()){
@@ -113,24 +113,24 @@ class AdminController extends Controller
         }
 
         DB::transaction(function() use($request) {
-            $city_id = explode('.', $request->city)[0];
-            $city = explode('.', $request->city)[1];
-            $province_id = explode('.', $request->province)[0];
-            $province = explode('.', $request->province)[1];
-            $ward_id = explode('.', $request->ward)[0];
-            $ward = explode('.', $request->ward)[1];
+            // $province_id = explode('.', $request->province)[0];
+            // $province = explode('.', $request->province)[1];
+            // $district_id = explode('.', $request->district)[0];
+            // $district = explode('.', $request->district)[1];
+            // $ward_id = explode('.', $request->ward)[0];
+            // $ward = explode('.', $request->ward)[1];
 
             $admin = Admin::where('id', $request->id)->first();
             $admin->update([
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,
                 'mail_address' => $request->mail_address,
-                'city_id' => $city_id,
-                'city_name' => $city,
-                'province_id' => $province_id,
-                'province_name' => $province,
-                'ward_id' => $ward_id,
-                'ward_name' => $ward,
+                'province_id' => $request->province,
+                // 'province_name' => $province,
+                'district_id' => $request->district,
+                // 'district_name' => $district,
+                'ward_id' => $request->ward,
+                // 'ward_name' => $ward,
                 'address' => $request->address,
                 'tel' => $request->tel,
                 'password' => $request->password
@@ -146,12 +146,12 @@ class AdminController extends Controller
         return redirect('/admin/profile')->with('success', 'Cập nhật thông tin thành công');
     }
 
-    public function adminGetProvinceInfo(Request $request) {
+    public function adminGetDistrictInfo(Request $request) {
         $data = $request->all();
         $user = Auth::guard('admin')->user();
 
-        $province = DB::table("province")->select('*')->where("province.city_id", '=', $data["cityCode"])->get();
-        $returnView = view("Admin.admin-get-province")->with(['options' => $province, 'admin' => $user])->render();
+        $district = DB::table("districts")->select('*')->where("districts.province_id", '=', $data["provinceCode"])->get();
+        $returnView = view("Admin.admin-get-district")->with(['options' => $district, 'admin' => $user])->render();
         return response()->json(["html" => $returnView], 200);
     }
 
@@ -159,9 +159,8 @@ class AdminController extends Controller
         $data = $request->all();
         $user = Auth::guard('admin')->user();
 
-        $ward = DB::table("ward")->select('*')->where("ward.province_id", '=', $data["provinceCode"])->get();
+        $ward = DB::table("wards")->select('*')->where("wards.district_id", '=', $data["districtCode"])->get();
         $returnView = view("Admin.admin-get-ward")->with(['options' => $ward, 'admin' => $user])->render();
         return response()->json(["html" => $returnView], 200);
     }
-    
 }

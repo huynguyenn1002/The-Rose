@@ -18,13 +18,19 @@ Route::get('/', [App\Http\Controllers\AdminController::class, 'adminDashboard'])
 Route::get('/home', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard.get');
 
 Route::prefix('admin')->group(function () {
+
+    //AdminController
     Route::get('/login', [App\Http\Controllers\AdminController::class, 'showLoginForm'])->name('admin.login.get');
     Route::post('/login', [App\Http\Controllers\AdminController::class, 'adminLogin'])->name('admin.login.post');
     Route::get('/register', [App\Http\Controllers\AdminController::class, 'showRegisterForm'])->name('admin.register.get');
     Route::post('/register', [App\Http\Controllers\AdminController::class, 'adminRegister'])->name('admin.register.post');
     Route::post('/logout', [App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/profile', [App\Http\Controllers\AdminController::class, 'showAdminProfile'])->name('admin.profile.get')->middleware('admin');
-    Route::get('get-province-info/', [App\Http\Controllers\AdminController::class, 'adminGetProvinceInfo'])->name('admin.admin-get-province');
+    Route::get('get-district-info/', [App\Http\Controllers\AdminController::class, 'adminGetDistrictInfo'])->name('admin.admin-get-district');
     Route::get('get-ward-info/', [App\Http\Controllers\AdminController::class, 'adminGetWardInfo'])->name('admin.admin-get-ward');
     Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateAdminProfile'])->name('admin.update.profile');
+
+    //CategoryController
+    Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'showListCategory'])->name('admin.category.list');
+
 });

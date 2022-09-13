@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('password_confirm')->nullable();
             $table->string('avatar')->nullable();
             $table->string('tel', 11)->nullable();
-            $table->integer('city_id')->nullable();
             $table->integer('province_id')->nullable();
+            $table->integer('district_id')->nullable();
             $table->integer('ward_id')->nullable();
-            $table->string('city_name', 255)->nullable();
             $table->string('province_name', 255)->nullable();
+            $table->string('district_name', 255)->nullable();
             $table->string('ward_name', 255)->nullable();
             $table->string('address', 255)->nullable();
             $table->timestamp('regist_datetime')->nullable()->useCurrent();

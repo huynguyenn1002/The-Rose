@@ -74,12 +74,12 @@
         </div>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img class="rounded-circle me-lg-2" src="{{ url('storage/avatar/'.$admin->avatar) }}" alt="" style="width: 40px; height: 40px;">
+                <img class="rounded-circle me-lg-2" src="{{ isset($admin->avatar) ? url('storage/avatar/'.$admin->avatar) : asset('/images/default.jpeg') }}" alt="" style="width: 40px; height: 40px;">
                 <span class="d-none d-lg-inline-flex">{{ isset($admin) ? $admin->firstname.' '.$admin->lastname : '' }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                <a href="{{route('admin.profile.get')}}" class="dropdown-item">My Profile</a>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="{{route('admin.profile.get')}}" class="dropdown-item">Trang cá nhân</a>
+                <a href="#" class="dropdown-item">Cài đặt</a>
                 <a class="dropdown-item" href="{{ route('admin.logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     {{ __('Đăng xuất') }}
