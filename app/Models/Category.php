@@ -10,6 +10,7 @@ class Category extends Model
     use HasFactory;
 
     protected $table = "category";
+    public $timestamps = true;
 
     protected $fillable = [
         'id', 
@@ -19,5 +20,9 @@ class Category extends Model
         'created_at'
     ];
 
-    public $timestamps = false;
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
 }

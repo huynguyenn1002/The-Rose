@@ -9,7 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable 
 {
     use HasFactory;
-
+    
+    public $timestamps = true;
+    
     protected $fillable = [
         'firstname', 
         'lastname', 
@@ -36,5 +38,4 @@ class Admin extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public $timestamps = false;
 }

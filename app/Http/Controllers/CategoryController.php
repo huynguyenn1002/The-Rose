@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function showListCategory()
     {
         $admin = Auth::guard('admin')->user();
-        $category = DB::table('category')->get();
+        $category =Category::orderBy('updated_at', 'desc')->get();
         return view('FlowerCategory.category-list', ['admin' => $admin, 'categories' => $category]);
     }
 
@@ -124,8 +124,7 @@ class CategoryController extends Controller
      */
     public function deleteCategory(Request $request, $id)
     {
-        dd($id);
-        $category = Category::where('id', '=', $id)->delete();
-        // return redirect('/admin/category/list');
+        $category = Category::where('id', $id)->delete();
+        return redirect('/admin/category/list')->with('success', 'Xóa danh mục thành công');
     }
 }
