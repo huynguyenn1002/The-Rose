@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use Auth;
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -13,7 +17,9 @@ class CategoryController extends Controller
      */
     public function showListCategory()
     {
-        return view('FlowerCategory.category-list');
+        $admin = Auth::guard('admin')->user();
+        $category = DB::table('category')->get();
+        return view('FlowerCategory.category-list', ['admin' => $admin, 'categories' => $category]);
     }
 
     /**
@@ -32,9 +38,23 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addCategory(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'category_name' => 'required|max:200',
+            'description' => 'required|string',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors(($validator))->withInput();
+        }
+        
+        Category::create([
+            'name' => $request->category_name,
+            'description' => $request->description,
+        ]);
+
+        return redirect('/admin/category/list')->with('success', 'Thêm mới danh mục thành công');
     }
 
     /**
@@ -66,9 +86,34 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateCategory($id)
     {
-        //
+        $category = Category::find($id);
+
+	    return response()->json([
+	      'data' => $category
+	    ]);
+    }
+
+    public function editCategory(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:200',
+            'description' => 'required|string',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors(($validator))->withInput();
+        }
+
+        Category::where('id', '=', $id)->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+            ],
+        );
+
+        return response()->json([ 'success' => true ]);
     }
 
     /**
@@ -77,8 +122,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteCategory(Request $request, $id)
     {
-        //
+        dd($id);
+        $category = Category::where('id', '=', $id)->delete();
+        // return redirect('/admin/category/list');
     }
 }

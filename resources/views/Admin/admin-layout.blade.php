@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>The Rose - Flower</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -43,7 +43,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/81c1ece84e.js" crossorigin="anonymous"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>

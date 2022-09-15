@@ -8,9 +8,6 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
-use App\Models\City;
-use App\Models\Province;
-use App\Models\Ward;
 
 
 class AdminController extends Controller

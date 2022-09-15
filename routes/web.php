@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard.get')->middleware('admin');
-Route::get('/home', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard.get');
 
 Route::prefix('admin')->group(function () {
 
@@ -32,5 +31,8 @@ Route::prefix('admin')->group(function () {
 
     //CategoryController
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'showListCategory'])->name('admin.category.list');
-
+    Route::post('/category/add', [App\Http\Controllers\CategoryController::class, 'addCategory'])->name('admin.category.add');
+    Route::get('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'updateCategory'])->name('admin.category.update');
+    Route::post('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'editCategory'])->name('admin.category.edit');
+    Route::post('/category/delete/{$id}', [App\Http\Controllers\CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
 });
