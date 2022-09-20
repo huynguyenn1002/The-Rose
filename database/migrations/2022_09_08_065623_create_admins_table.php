@@ -29,8 +29,7 @@ return new class extends Migration
             $table->string('district_name', 255)->nullable();
             $table->string('ward_name', 255)->nullable();
             $table->string('address', 255)->nullable();
-            $table->timestamp('regist_datetime')->nullable()->useCurrent();
-            $table->timestamp('last_update')->useCurrent();
+            $table->timestamps();
         });
     }
 

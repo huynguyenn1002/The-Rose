@@ -1,8 +1,6 @@
 @extends('Admin.admin-layout')
 @section("content")
 
-<!-- Category Start -->
-
 <div class="container">
     <div class="row flex-row">
         <div class="col-sm-8">
@@ -59,35 +57,16 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table" id="category-table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên danh mục</th>
-                <th scope="col">Mô tả</th>
+                <th scope="col" style="width: 20%">Tên danh mục</th>
+                <th scope="col" style="width: 50%">Mô tả</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
-
-        <tbody>
-            @foreach($categories as $key => $category)
-            <tr>
-                <th scope="row">{{ $key + 1}}</th>
-                <td><a href="">{{ $category->name }}</a></td>
-                <td style="width: 60%">{{ $category->description }}</td>
-                <td style="width: 20%">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
-                            data-bs-target="#myModal" id="btnEdit" onclick="viewItem({{ $category->id }})">Chỉnh
-                            sửa</button>
-                        <button type="submit" class="btn btn-danger" onclick="deleteItem({{ $category->id }})"
-                            id="Reco">
-                            Xoá</button>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
     </table>
 </div>
 
@@ -96,21 +75,17 @@
 
 @endsection
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="{{ asset('js/category-list.js') }}"></script>
 <script>
+var listCategoryUrl = '{!! route("admin.category.list") !!}';
+
 $(document).ready(function() {
     $('#myModal').on('shown.bs.modal', function() {
         $('#category_name').trigger('focus')
     })
     $('div#menu-nav a').removeClass('active');
     $('div#menu-nav a#menu-category').addClass('active');
-});
-</script>
 
-<script>
-$(document).ready(function() {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

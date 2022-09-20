@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateAdminProfile'])->name('admin.update.profile');
 
     //CategoryController
-    Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'showListCategory'])->name('admin.category.list');
+    Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'getListCategory'])->name('admin.category.list');
     Route::post('/category/add', [App\Http\Controllers\CategoryController::class, 'addCategory'])->name('admin.category.add');
     Route::get('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'updateCategory'])->name('admin.category.update');
     Route::post('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'editCategory'])->name('admin.category.edit');

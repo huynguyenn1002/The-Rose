@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Validator;
+use Yajra\Datatables\Datatables;
 
 class CategoryController extends Controller
 {
@@ -15,11 +16,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showListCategory()
+
+
+    public function getListCategory(Request $request)
     {
-        $admin = Auth::guard('admin')->user();
-        $category =Category::orderBy('updated_at', 'desc')->get();
-        return view('FlowerCategory.category-list', ['admin' => $admin, 'categories' => $category]);
+        if($request->ajax()) {
+            $category =Category::orderBy('updated_at', 'desc')->get();
+            return Datatables::of($category)
+            ->make(true);
+        }
+
+        return view('FlowerCategory.category-list');
     }
 
     /**

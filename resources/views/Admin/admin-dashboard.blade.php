@@ -1,7 +1,5 @@
 @extends('Admin.admin-layout')
-
 @section("content")
-
     @if (session('success'))
     <p> {{ session('success') }}</p>
     @endif
