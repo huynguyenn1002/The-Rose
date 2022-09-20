@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function getListCategory(Request $request)
     {
         if($request->ajax()) {
-            $category =Category::orderBy('updated_at', 'desc')->get();
+            $category =Category::all();
             return Datatables::of($category)
             ->make(true);
         }

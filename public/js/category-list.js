@@ -1,51 +1,54 @@
-$(function() {
-
-    var table = $('#category-table').DataTable({
-        "language": {
-            "lengthMenu": "Hiển thị _MENU_ danh mục",
-            "zeroRecords": "Không có danh mục nào",
-            "info": "trang _PAGE_ trong _PAGES_",
-            "infoEmpty": "Không có danh mục nào",
-            "infoFiltered": "(filtered from _MAX_ total records)"
+$(function () {
+    $("#category-table").DataTable({
+        language: {
+            url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json"
         },
         autoWidth: false,
         processing: true,
         serverSide: true,
+        info: false,
         ajax: listCategoryUrl,
-        order: [[1, 'asc']],
-        columns: [{
-                data: 'id',
-                name: 'name'
+        order: [[0, "desc"]],
+        fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+            var index = iDisplayIndex +1;
+            $('td:eq(0)', nRow).html(index);
+            return nRow;
+        },
+        columns: [
+            {
+                data: "id",
             },
             {
-                data: 'name',
-                name: 'name'
+                render: (data, type, row) => {
+                    return `<a href="/category/detail/${row.id}">${row.name}</a>`;
+                },
             },
             {
-                data: 'description',
-                name: 'description'
+                data: "description",
             },
             {
-                data: '',
-                render: (data,type,row) => {
+                data: "",
+                render: (data, type, row) => {
                     return `<button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
                             data-bs-target="#myModal" id="btnEdit" onclick="viewItem(${row.id})">Chỉnh
                             sửa</button>`;
                 },
-                "bSortable": false
+                bSortable: false,
             },
             {
-                data: '',
-                render: (data,type,row) => {
+                data: "",
+                render: (data, type, row) => {
                     return `<button type="submit" class="btn btn-danger" onclick="deleteItem(${row.id})">
                             Xoá</button>`;
                 },
-                "bSortable": false
-            }
-        ]
+                bSortable: false,
+            },
+        ],
     });
-    $('#category-table tbody').on( 'click', 'tr', function () {
-        console.log( table.row( this ).data() );
-    } );
-    console.log(tb);
+
+    // table.on( 'order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // }).draw();
 });
