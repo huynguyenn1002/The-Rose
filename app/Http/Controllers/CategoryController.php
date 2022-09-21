@@ -70,9 +70,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showDetailCategory($id)
     {
-        //
+        $categoryDetail = Category::where('id', $id)->first();
+
+        return view('FlowerCategory.category-detail', ['categoryDetail' => $categoryDetail]);
     }
 
     /**

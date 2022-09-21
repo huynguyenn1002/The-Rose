@@ -20,7 +20,7 @@ $(function () {
             },
             {
                 render: (data, type, row) => {
-                    return `<a href="/category/detail/${row.id}">${row.name}</a>`;
+                    return `<a href="detail/${row.id}">${row.name}</a>`;
                 },
             },
             {
