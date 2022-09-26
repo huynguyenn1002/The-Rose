@@ -4,7 +4,6 @@
 <div class="container">
     <div class="row flex-row">
         <div class="col-sm-8">
-            <h2 class="my-2">{{ $categoryDetail->name }}</h2>
             @if (session('success'))
             <p> {{ session('success') }}</p>
             @endif
@@ -18,17 +17,31 @@
             </div>
         </div>
 
-        <table class="table" id="category-table">
+        <table class="table" id="product-table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col" style="width: 10%">STT</th>
-                    <th scope="col" style="width: 30%">Tên loại hoa</th>
-                    <th scope="col" style="width: 30%">Ảnh</th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên loại hoa</th>
+                    <th scope="col">Ảnh</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Chiết khấu</th>
+                    <th scope="col">Số lượt xem</th>
                     <th scope="col">Ghi chú</th>
                 </tr>
             </thead>
         </table>
     </div>
-
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/product-list.js') }}"></script>
+<script>
+    var baseUrl = window.location.href;
+    var categoryId = baseUrl.substring(baseUrl.lastIndexOf('/') + 1)
+    var listProductUrl = '{!! route("admin.detail.category", ":id") !!}';
+
+    listProductUrl = listProductUrl.replace(':id', categoryId);
+
+</script>
 @endsection

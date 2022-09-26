@@ -74,7 +74,7 @@ class AdminController extends Controller
     }
 
     public function logout(Request $request) {
-        Auth::logout();
+        Auth::guard('admin')->logout();
     
         session()->flush();
     

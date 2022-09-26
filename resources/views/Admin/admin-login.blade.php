@@ -73,14 +73,14 @@
                                 <a href="">Forgot Password</a>
                             </div>
                             @foreach (array_unique($errors->all()) as $error)
-                            <p>{{ $error }}</p>
+                                <p>{{ $error }}</p>
                             @endforeach
                             @if (session('status'))
-                            <p> {{ session('status') }}</p>
+                                <p> {{ session('status') }}</p>
                             @endif
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
                         </form>
-                        <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
+                        <p class="text-center mb-0">Don't have an Account? <a href="{{ route('admin.register.get') }}">Sign Up</a></p>
                     </div>
                 </div>
             </div>

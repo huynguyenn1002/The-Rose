@@ -35,5 +35,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'updateCategory'])->name('admin.category.update');
     Route::post('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'editCategory'])->name('admin.category.edit');
     Route::post('/category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
-    Route::get('/category/detail/{id}', [App\Http\Controllers\CategoryController::class, 'showDetailCategory'])->name('admin.detail.category');
+
+    //CategoryController
+    Route::get('/category/detail/{id}', [App\Http\Controllers\ProductController::class, 'showDetailCategory'])->name('admin.detail.category');
 });
