@@ -76,7 +76,7 @@
                             <a href="{{ route('admin.category.list') }}" id="menu-category" class="nav-link"><i
                                     class="fa fa-laptop me-2"></i>Danh mục Hoa</a>
                         </div>
-                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                        <!-- <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
                         <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                         <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
                         <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -89,12 +89,11 @@
                                 <a href="404.html" class="dropdown-item">404 Error</a>
                                 <a href="blank.html" class="dropdown-item">Blank Page</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </nav>
             </div>
             @yield('content')
-
             <!-- Category End -->
         </div>
     </div>
@@ -114,6 +113,5 @@
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ asset('js/main.js') }}"></script>
-
     @yield('js')
 </body>

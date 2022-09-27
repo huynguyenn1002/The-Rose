@@ -69,8 +69,6 @@
         </thead>
     </table>
 </div>
-
-
 <!-- Category End -->
 
 @endsection

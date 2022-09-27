@@ -11,13 +11,6 @@ use Yajra\Datatables\Datatables;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
     public function getListCategory(Request $request)
     {
         if($request->ajax()) {
@@ -29,12 +22,6 @@ class CategoryController extends Controller
         return view('FlowerCategory.category-list');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function addCategory(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -54,13 +41,6 @@ class CategoryController extends Controller
         return redirect('/admin/category/list')->with('success', 'Thêm mới danh mục thành công');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function updateCategory($id)
     {
         $category = Category::find($id);
@@ -91,12 +71,6 @@ class CategoryController extends Controller
         return response()->json([ 'success' => true ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function deleteCategory(Request $request, $id)
     {
         $category = Category::where('id', $id)->delete();
