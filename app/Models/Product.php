@@ -19,6 +19,7 @@ class Product extends Model
         'description',
         'price',
         'discount',
+        'type',
         'image',
         'view',
         'updated_at',
@@ -29,5 +30,10 @@ class Product extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function images()
+    {
+        return $this->hasMany('App\ProductImage', 'product_id');
+    }
 
 }

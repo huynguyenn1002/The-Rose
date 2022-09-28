@@ -21,6 +21,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa cúc hoạ mi',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 0,
             'view'              => '5',
             'description' => 'Hoa cúc hoạ mi'
         ]);
@@ -31,6 +32,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa hồng',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 1,
             'view'              => '6',
             'description' => 'Hoa hồng'
         ]);
@@ -41,6 +43,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa ly',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 3,
             'view'              => '7',
             'description' => 'Hoa ly'
         ]);
@@ -51,6 +54,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa hướng dương',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 2,
             'view'              => '8',
             'description' => 'Hoa hướng dương'
         ]);
@@ -61,6 +65,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa dơn',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 4,
             'view'              => '9',
             'description' => 'Hoa dơn'
         ]);
@@ -71,6 +76,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa huệ',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 1,
             'view'              => '100',
             'description' => 'Hoa huệ'
         ]);
@@ -81,6 +87,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa thược dược',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 2,
             'view'              => '11',
             'description' => 'Hoa thược dược'
         ]);
@@ -91,6 +98,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa cẩm chướng',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 3,
             'view'              => '10',
             'description' => 'Hoa cẩm chướng'
         ]);
@@ -101,6 +109,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa lan',
             'price'              => '100000',
             'discount'              => '10',
+            'type'              => 1,
             'view'              => '10',
             'description' => 'Hoa lan'
         ]);
@@ -111,6 +120,7 @@ class ProductSeeder extends Seeder
             'product_name'              => 'Hoa đào',
             'price'              => '100000',
             'discount'              => '15',
+            'type'              => 4,
             'view'              => '10',
             'description' => 'Hoa đào'
         ]);

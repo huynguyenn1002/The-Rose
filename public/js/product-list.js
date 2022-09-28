@@ -1,7 +1,7 @@
 $(function () {
     $("#product-table").DataTable({
         language: {
-            url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json"
+            url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json",
         },
         autoWidth: false,
         processing: true,
@@ -9,9 +9,14 @@ $(function () {
         info: false,
         ajax: listProductUrl,
         order: [[1, "desc"]],
-        fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-            var index = iDisplayIndex +1;
-            $('td:eq(0)', nRow).html(index);
+        fnRowCallback: function (
+            nRow,
+            aData,
+            iDisplayIndex,
+            iDisplayIndexFull
+        ) {
+            var index = iDisplayIndex + 1;
+            $("td:eq(0)", nRow).html(index);
             return nRow;
         },
         columns: [
@@ -21,14 +26,31 @@ $(function () {
             },
             {
                 render: (data, type, row) => {
-                    return `<a href="detail/${row.id}">${row.product_name}</a>`;
+                    return `<a href="${row.action}">${row.product_name}</a>`;
                 },
             },
             {
                 data: "image",
                 render: (data, type, row) => {
-                    return `<img class="rounded-circle" style="height: 5rem"
+                    return `<img class="rounded-circle" style="height: 5rem; width: 5rem"
                     src="${row.image}">`;
+                },
+                bSortable: false,
+            },
+            {
+                data: "type",
+                render: (data, type, row) => {
+                    if (row.type == 1) {
+                        return "Bó hoa";
+                    } else if (row.type == 2) {
+                        return "Giỏ hoa";
+                    } else if (row.type == 3) {
+                        return "Lãng hoa";
+                    } else if (row.type == 4) {
+                        return "Chậu hoa";
+                    } else {
+                        return "Kệ hoa";
+                    }
                 },
                 bSortable: false,
             },
@@ -59,15 +81,12 @@ $(function () {
                 },
                 bSortable: false,
             },
-           
         ],
     });
-
 
     // table.on( 'order.dt search.dt', function () {
     //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
     //         cell.innerHTML = i+1;
     //     } );
     // }).draw();
-
 });

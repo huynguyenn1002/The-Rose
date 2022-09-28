@@ -1,11 +1,14 @@
 @extends('Admin.admin-layout')
 @section("content")
+<div class=my-2>
+    <a href="javascript:history.back()"><i class="fa-solid fa-arrow-left mx-2"></i>Trở lại Danh mục</a>
+</div>
 <div class="container">
     <div class="row flex-row">
         <div class="col-sm-8">
             <h2 class="my-2">{{ $categoryInfo->name }}</h2>
             @if (session('success'))
-                <p> {{ session('success') }}</p>
+            <p> {{ session('success') }}</p>
             @endif
         </div>
         <div class="col-sm-4 d-flex justify-content-end">
@@ -46,6 +49,19 @@
                                 <input type="file" name="product_image" id="product_image">
                             </div>
                             <div class="mb-3">
+                                <label for="type">
+                                    <h6>Giá (VNĐ)</h6>
+                                </label>
+                                <select name="type" class="form-control bg-white" required>
+                                    <option value="">Chọn kiểu hoa</option>
+                                    <option value="1">Bó hoa</option>
+                                    <option value="2">Giỏ hoa</option>
+                                    <option value="3">Lẵng hoa</option>
+                                    <option value="4">Chậu hoa</option>
+                                    <option value="5">Kệ hoa (Hoa chúc mừng)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="product_price">
                                     <h6>Giá (VNĐ)</h6>
                                 </label>
@@ -83,6 +99,7 @@
                     <th scope="col">STT</th>
                     <th scope="col">Tên loại hoa</th>
                     <th scope="col">Ảnh</th>
+                    <th scope="col">Kiểu hoa</th>
                     <th scope="col">Giá</th>
                     <th scope="col">Chiết khấu</th>
                     <th scope="col">Số lượt xem</th>
@@ -118,7 +135,7 @@ $(document).ready(function() {
         this.setCustomValidity("Vui lòng nhập ký tự là chữ số");
     };
 
-    $("input[name=discount]")[0].oninput= function () {
+    $("input[name=discount]")[0].oninput = function() {
         this.setCustomValidity("");
     };
 
@@ -128,21 +145,24 @@ $(document).ready(function() {
         }
     });
 
-    
+
 });
 
 function deleteItem(id) {
-    $.ajax({
-        type: "POST",
-        url: "{{url('admin/product/delete')}}/" + id,
-        data: {
-            id: id
-        },
-        success: function(result) {
-            alert("Bạn có chắc chắn muốn xoá sản phẩm này?")
-            location.reload();
-        }
-    });
+    var isConfirmed = confirm('Bạn có chắc chắn muốn xoá sản phẩm này?');
+    if (isConfirmed) {
+        $.ajax({
+            type: "POST",
+            url: "{{url('admin/product/delete')}}/" + id,
+            data: {
+                id: id
+            },
+            success: function(result) {
+                alert("Xoá sản phẩm thành công");
+                location.reload();
+            }
+        });
+    }
 }
 
 var currencyMask = IMask(
@@ -155,6 +175,5 @@ var currencyMask = IMask(
             }
         }
     });
-
 </script>
 @endsection

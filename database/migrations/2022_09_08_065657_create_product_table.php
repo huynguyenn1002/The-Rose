@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->string('product_name', 100);
             $table->string('description', 256);
+            $table->integer('type');
             $table->bigInteger('price')->default(0);
             $table->integer('discount')->default(0)->nullable();
             $table->string('image')->nullable();

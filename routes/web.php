@@ -40,4 +40,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/category/detail/{id}', [App\Http\Controllers\ProductController::class, 'showDetailCategory'])->name('admin.detail.category');
     Route::post('/product/add', [App\Http\Controllers\ProductController::class, 'addProduct'])->name('admin.product.add');
     Route::post('/product/delete/{id}', [App\Http\Controllers\ProductController::class, 'deleteProduct'])->name('admin.product.delete');
+    Route::get('/product/detail/{id}', [App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('admin.product.detail');
+    Route::post('/product/update', [App\Http\Controllers\ProductController::class, 'updateProduct'])->name('admin.product.update');
 });
