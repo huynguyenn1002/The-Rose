@@ -8,18 +8,10 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
-use App\Models\City;
-use App\Models\Province;
-use App\Models\Ward;
 
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function adminDashboard()
     {
         $admin = Auth::guard('admin')->user();
@@ -77,7 +69,7 @@ class AdminController extends Controller
     }
 
     public function logout(Request $request) {
-        Auth::logout();
+        Auth::guard('admin')->logout();
     
         session()->flush();
     

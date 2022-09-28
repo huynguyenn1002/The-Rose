@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard.get')->middleware('admin');
-Route::get('/home', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('admin.dashboard.get');
 
 Route::prefix('admin')->group(function () {
 
@@ -31,6 +30,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateAdminProfile'])->name('admin.update.profile');
 
     //CategoryController
-    Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'showListCategory'])->name('admin.category.list');
+    Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'getListCategory'])->name('admin.category.list');
+    Route::post('/category/add', [App\Http\Controllers\CategoryController::class, 'addCategory'])->name('admin.category.add');
+    Route::get('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'updateCategory'])->name('admin.category.update');
+    Route::post('/category/edit/{id}', [App\Http\Controllers\CategoryController::class, 'editCategory'])->name('admin.category.edit');
+    Route::post('/category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
 
+    //ProductController
+    Route::get('/category/detail/{id}', [App\Http\Controllers\ProductController::class, 'showDetailCategory'])->name('admin.detail.category');
+    Route::post('/product/add', [App\Http\Controllers\ProductController::class, 'addProduct'])->name('admin.product.add');
+    Route::post('/product/delete/{id}', [App\Http\Controllers\ProductController::class, 'deleteProduct'])->name('admin.product.delete');
+    Route::get('/product/detail/{id}', [App\Http\Controllers\ProductController::class, 'getProductDetail'])->name('admin.product.detail');
+    Route::post('/product/update', [App\Http\Controllers\ProductController::class, 'updateProduct'])->name('admin.product.update');
 });
