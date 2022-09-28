@@ -60,7 +60,7 @@
                             value="{{ $product->product_name}}">
                     </div>
                     <div class="col-md-12 my-2"><label class="labels h5">Kiểu hoa</label>
-                        <select name="type" class="form-control bg-white" id="type" disabled>
+                        <select name="type" class="form-control" id="type" disabled>
                             <option value="">Chọn kiểu hoa</option>
                             @foreach($typeFlower as $type)
                             <option value="{{ $type->id }}" @if($product->type == $type->id) selected = "selected"
@@ -118,6 +118,7 @@ $("#check-change-info").click(function() {
         $("input[name='description']").attr("readonly", false);
         $('#product_image').attr("disabled", false);
         $('#type').attr("disabled", false);
+        $('#type').addClass('bg-white');
         $('#btn-submit-info').show();
     } else {
         $("input[name='product_name']").attr("readonly", true);
@@ -127,6 +128,7 @@ $("#check-change-info").click(function() {
         $('#product_image').attr("disabled", true);
         $('#type').attr("disabled", true);
         $('#btn-submit-info').hide();
+        $('#type').removeClass('bg-white');
     }
 });
 var swiper = new Swiper(".mySwiper", {
